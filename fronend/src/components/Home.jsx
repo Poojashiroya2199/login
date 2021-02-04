@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import axios from "axios";
-export default function Home(){
+export default function Home(props){
 
 const [list,setlist]=useState([]);
 
@@ -44,7 +44,10 @@ useEffect(() => {
     listusers();
     // searchlist();
 }, []);
-
+const editprofile=(id)=>{
+    console.log(id);
+    props.history.push("/profile/"+id);
+}
 
     return <div className="homecontainer">
         <input placeholder="searchuser" type="text" onChange={searchlist}/>
@@ -55,7 +58,10 @@ useEffect(() => {
                             <div><img src={user.userimage} alt="" width="100px" height="100px"/></div>
                             <div >Name :{user.username} </div>
                             <div>Email :{user.email}</div>
+                            <div> <button onClick={()=>editprofile(user._id)}>Edit</button></div>
+                            <div>
                             <button onClick={()=>handledelete(user._id)}>delete</button>
+                            </div>
                         </li>
                     )):"users not existed"
                 }</ul>

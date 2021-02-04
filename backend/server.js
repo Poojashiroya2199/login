@@ -71,6 +71,16 @@ app.post("/signup",async function(req,res){
       });
     }
 });
+app.put("/profile/:id",async function(req,res){
+    const id=req.params.id;
+    const profileuser=await User.findOne({
+        id
+    });
+    if(profileuser){
+        console.log(profileuser);
+        res.send(profileuser);
+    }
+})
 app.delete("/deleteuser/:id",(req,res)=>{
     console.log(req.params.id);
     console.log("delete");

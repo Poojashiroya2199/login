@@ -24,6 +24,7 @@ export default function Signin(props){
         Swal.fire("Wow","Successfully signed in ","success");
         console.log(response.data);
         seterror("");
+        props.history.push("/home");
      })
      .catch(function (error) {
          console.log(error);
