@@ -4,7 +4,10 @@ var SignUpSchema = new mongoose.Schema({
     username: String,
     email:String,
     phoneno:Number,
-    password:String
+    password:String,
+    confirmpassword:String,
+    userimage:String,
+    userinterest:String
   });
 
   // compile schema to model

@@ -45,6 +45,9 @@ app.post("/signup",async function(req,res){
     var email=req.body.email;
     var phoneno=req.body.phoneno;
     var password=req.body.password;
+    var confirmpassword=req.body.confirmpassword;
+    var userimage=req.body.userimage;
+    var userinterest=req.body.userinterest;
         const signupuser=await User.findOne({
             username,email,phoneno
         });
@@ -54,7 +57,7 @@ app.post("/signup",async function(req,res){
         }
         else{
        // a document instance
-      var User1 = new User({ username: username, email:email, phoneno:phoneno,password:password });
+      var User1 = new User({ username: username, email:email, phoneno:phoneno,password:password,confirmpassword:confirmpassword,userimage:userimage,userinterest:userinterest });
       // save model to database
 
       User1.save(function (err,data) {
@@ -65,9 +68,21 @@ app.post("/signup",async function(req,res){
         else{
             res.send({status:1,result:data});
         }
-        // console.log(user.name + " saved to userstore collection.");
       });
     }
+});
+app.delete("/deleteuser/:id",(req,res)=>{
+    console.log(req.params.id);
+    console.log("delete");
+    const result=User.deleteOne({_id:req.params.id}).exec();
+    res.send(result);
+    
+})
+app.get("/home",(req,res)=>{
+    User.find({}, function(err, data){
+        console.log(">>>> " + data );
+        res.send(data);
+    });
 })
 app.get("/signin",(req,res)=>{
     // console.log("login");
